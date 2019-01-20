@@ -8,8 +8,23 @@ gender <- c(0, 0, 0, 0, 1, 1, 1, 1)
 hospital <- c(25, 38, 10, 4, 25, 59, 19, 3)
 observation <- c(530, 514, 81, 9, 381, 582, 93, 10)
 
+
 # employ.data <- data.frame(employee, salary, startdate)
 test.data <- data.frame(gender, health, hospital, observation)
+
+
+HOSPy <- hospital
+HOSPn <- observation - hospital
+health2 <- c(0, 1, 0, 0, 0, 1, 0, 0)
+health3 <- c(0, 0, 1, 0, 0, 0, 1, 0)
+health4 <- c(0, 0, 0, 1, 0, 0, 0, 1)
+gedata <- data.frame(gender, health2, health3, health4)
+
+
+xtabs (~hospital+health, data=test.data)
+
+LOGREG <- glm(cbind(HOSPy, HOSPn)~gender+health2+health3+health4+gender:health2+gender:health3+gender:health4, family=binomial, data=gedata)
+
 
 
 
