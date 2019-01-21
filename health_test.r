@@ -18,12 +18,16 @@ HOSPn <- observation - hospital
 health2 <- c(0, 1, 0, 0, 0, 1, 0, 0)
 health3 <- c(0, 0, 1, 0, 0, 0, 1, 0)
 health4 <- c(0, 0, 0, 1, 0, 0, 0, 1)
-gedata <- data.frame(gender, health2, health3, health4)
+gedata <- data.frame(gender, health2, health3, health4) 
 
 
 xtabs (~hospital+health, data=test.data)
 
 LOGREG <- glm(cbind(HOSPy, HOSPn)~gender+health2+health3+health4+gender:health2+gender:health3+gender:health4, family=binomial, data=gedata)
+
+# add more 
+
+# edit after add
 
 
 
