@@ -23,9 +23,17 @@ gedata <- data.frame(gender, health2, health3, health4)
 
 xtabs (~hospital+health, data=test.data)
 
+# regression on hospy/hospn???
 LOGREG <- glm(cbind(HOSPy, HOSPn)~gender+health2+health3+health4+gender:health2+gender:health3+gender:health4, family=binomial, data=gedata)
 
 # add more 
+LOGREG2 <- glm(cbind(HOSPy, HOSPn)~gender+health2+health3+health4, family=binomial, data=gedata)
+
+LOGREG3 <- glm(cbind(HOSPy, HOSPn)~gender+health, family=binomial, data=gedata)
+
+LOGREG4 <- glm(cbind(HOSPy, HOSPn)~gender+health+gender:health, family=binomial, data=gedata)
+
+
 
 # edit after add
 
