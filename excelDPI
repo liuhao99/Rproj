@@ -1,0 +1,25 @@
+getwd()
+library(readxl)
+data <- read_excel ("DPIcomparison1450.xlsx", sheet="Data")
+dataD = r_fall[,c(2,11,12,13,14)]
+names(dataD) <- c("Freq", "THVD1550", "MAX14770E", "LTC2862A", "ISL3259E")
+
+data2 <- read_excel ("DPIcomparison1450.xlsx", sheet="Sheet1")
+names(data2) <- c("Freq", "THVD1450_3V","THVD1450_5V") 
+
+# example of merge
+# https://www.math.ucla.edu/~anderson/rw1001/library/base/html/merge.html
+
+dataDPI <- merge(dataD, data2, by.x="Freq", by.y="Freq")
+
+# ggplot multiple lines  
+# https://stackoverflow.com/questions/3777174/plotting-two-variables-as-lines-using-ggplot2-on-the-same-graph
+
+library(ggplot2)
+DPI <- ggplot(dataDPI, aes(Freq)) + 
++ geom_line(aes(y = THVD1550, colour = "1550")) +
++ geom_line(aes(y = THVD1450_3V, colour = "14503")) +
++ geom_line(aes(y = THVD1450_5V, colour = "14505")) 
+
+# plot in log in X axis
+DPI + scale_x_log10()
